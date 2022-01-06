@@ -1,0 +1,20 @@
+.navbg{
+    margin: 0px;
+    background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+    background-size: 400% 400%;
+    animation: Gradient 15s ease infinite;
+}
+
+li{
+    margin: 0px;
+    display: flex;
+    justify-content: right;
+    
+}
+
+a{
+    text-decoration: black;
+    font-weight: 550;
+    margin-right: 20px;
+    color: black;
+}
