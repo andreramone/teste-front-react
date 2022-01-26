@@ -62,54 +62,70 @@ function ClientPage() {
   return (
     <>
       <Modal
-        size="sm"
+        size="md"
         show={show}
         onHide={handleClose}
         backdrop="static"
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title></Modal.Title>
+          <Modal.Title>Deseja editar seus dados?</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Deseja editar seus dados?
-          <fieldset>
-            <li>
-              <label htmlFor="nome"> Nome:</label>
-              <input
-                type="text"
-                id="nome"
-                value={inputs.nome}
-                name="nome"
-                onChange={handleChange}
-                required
-              />
-            </li>
+          <form>
+            <fieldset>
+              <div className="row mb-3" >
+                <div className="col-md-2">
+                  <label className="form-label" htmlFor="nome"> Nome:</label>
+                </div>
+                <div className="col-md-10">
+                  <input
+                    className="form-control"
+                    type="text"
+                    id="nome"
+                    value={inputs.nome}
+                    name="nome"
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+              </div>
 
-            <li>
-              <label htmlFor="email"> Email:</label>
-              <input
-                type="email"
-                id="email"
-                value={inputs.email}
-                name="email"
-                onChange={handleChange}
-                required
-              />
-            </li>
+              <div className="row mb-3">
+                <div className="col-md-2 ">
+                  <label className="form-label" htmlFor="email"> Email:</label>
+                </div>
+                <div className="col-md-10">
+                  <input
+                  className="form-control"
+                    type="email"
+                    id="email"
+                    value={inputs.email}
+                    name="email"
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+              </div>
 
-            <li>
-              <label htmlFor="telefone"> Telefone:</label>
-              <input
-                type="text"
-                id="telefone"
-                value={inputs.telefone}
-                name="telefone"
-                onChange={handleChange}
-                required
-              />
-            </li>
-          </fieldset>
+              <div className="row mb-3">
+                <div className="col-md-2">
+                  <label className="form-label" htmlFor="tel"> Telefone:</label>
+                </div>
+                <div className="col-md-10">
+                  <input
+                  className="form-control"
+                    type="text"
+                    id="telefone"
+                    value={inputs.telefone}
+                    name="telefone"
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+              </div>
+            </fieldset>
+          </form>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
