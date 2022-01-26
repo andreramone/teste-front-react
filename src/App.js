@@ -1,27 +1,47 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import Navbar from './Components/Navbar/Navbar';
-import Login from './Components/Login/Login-page';
-import Error from './Components/Error-Page/ErrorPage'
-import PaginaInicial from './Components/Pagina-inicial/Pagina-inicial';
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import Login from "./Components/Login/Login-page";
+import Error from "./Components/Error-Page/ErrorPage";
+import ClientPage from "./Components/Client-Page/Client";
+import Cadastro from "./Components/Cadastro/Cadastro";
+import { StateMachineProvider, createStore } from "little-state-machine";
+import { isAuthenticated } from "./Services/auth";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-class App extends Component {
-  render() {
-    return (
-        <>
-            <Router>
-            <Navbar/>
-            
-            <Routes>
-            <Route exact path="/" element={<PaginaInicial />}/>
-            <Route path="/login" element={<Login/>} />
-            <Route path="*" element={<Error/>} />
-           </Routes>
-          
-        </Router>
-        </>
-    );
-  }
+function PrivateRoute({ children }) {
+  return isAuthenticated() ? children : <Navigate to="/" />;
 }
 
-export default App
+function App() {
+  createStore({
+    yourDetail: { email: "" },
+  });
+
+  return (
+    <StateMachineProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route
+            exact
+            path="/clientes"
+            element={
+              <PrivateRoute>
+                <ClientPage />
+              </PrivateRoute>
+            }
+          />
+          <Route exact path="/cadastro" element={<Cadastro />} />
+          <Route path="*" element={<Error />} />
+        </Routes>
+      </Router>
+    </StateMachineProvider>
+  );
+}
+
+export default App;
